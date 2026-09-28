@@ -234,31 +234,299 @@
         <section id="calculator" class="tab-content space-y-6">
             <div class="text-center max-w-xl mx-auto mb-6">
                 <h2 class="text-2xl font-black text-white font-tech" data-bg="Ориентировъчен Калкулатор" data-en="Price Estimator">Ориентировъчен Калкулатор</h2>
-                <p class="text-xs text-slate-400 mt-1" data-bg="Калкулирайте бързо приблизителната стойност" data-en="Quickly calculate an estimated cost">Калкулирайте бързо приблизителната стойност</p>
+                <p class="text-xs text-slate-400 mt-1" data-bg="Изберете услугите, от които се нуждаете" data-en="Select the services you need">Изберете услугите, от които се нуждаете</p>
             </div>
 
-            <div class="bg-brand-card border border-slate-800 p-6 sm:p-8 rounded-3xl grid md:grid-cols-12 gap-6 items-center">
-                <div class="md:col-span-7 space-y-5">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-2" data-bg="Площ на имота (кв. м):" data-en="Property Area (sq. m):">Площ на имота (кв. м):</label>
-                        <input type="number" id="calc-area" value="60" oninput="calculatePrice()" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white font-tech text-sm focus:border-brand-electric focus:outline-none">
-                    </div>
+            <div class="bg-brand-card border border-slate-800 p-6 sm:p-8 rounded-3xl grid md:grid-cols-12 gap-6 items-start">
+                <div class="md:col-span-7">
+                    <div id="calc-items" class="max-h-[520px] overflow-y-auto pr-2 space-y-2">
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="35" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Бойлер" data-en="Boiler">Бойлер</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">35 €</span>
+                        </label>
 
-                    <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-2" data-bg="Основен тип услуга:" data-en="Service Type:">Основен тип услуга:</label>
-                        <select id="calc-type" onchange="calculatePrice()" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs font-semibold focus:border-brand-electric focus:outline-none">
-                            <option value="12" data-bg="Частичен ремонт / Монтаж на осветителни тела" data-en="Minor Repairs / Lighting Assembly">Частичен ремонт / Монтаж на осветителни тела</option>
-                            <option value="25" selected data-bg="Цялостно изграждане / Реконструкция" data-en="Full Electrical Installation">Цялостно изграждане / Реконструкция</option>
-                            <option value="40" data-bg="Спешна диагностика + Подмяна на Ел. Табло" data-en="Emergency Diagnostic + Switchboard Replacement">Спешна диагностика + Подмяна на Ел. Табло</option>
-                        </select>
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Фурна за вграждане" data-en="Built-in Oven">Фурна за вграждане</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Котлони" data-en="Stovetop">Котлони</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Аспиратор" data-en="Range Hood">Аспиратор</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="60" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Трифазен уред" data-en="Three-phase Appliance">Трифазен уред</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">60 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="6" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж конзола с пробиване (гипсокартон)" data-en="Bracket Mounting w/ Drilling (Drywall)">Монтаж конзола с пробиване (гипсокартон)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">6 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="8" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж конзола с пробиване (тухла)" data-en="Bracket Mounting w/ Drilling (Brick)">Монтаж конзола с пробиване (тухла)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">8 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="15" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж конзола с пробиване (бетон)" data-en="Bracket Mounting w/ Drilling (Concrete)">Монтаж конзола с пробиване (бетон)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">15 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="8" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Отвор за разпределителна кутия (гипсокартон)" data-en="Distribution Box Hole (Drywall)">Отвор за разпределителна кутия (гипсокартон)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">8 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="10" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Отвор за разпределителна кутия (тухла)" data-en="Distribution Box Hole (Brick)">Отвор за разпределителна кутия (тухла)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">10 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Отвор за разпределителна кутия (бетон)" data-en="Distribution Box Hole (Concrete)">Отвор за разпределителна кутия (бетон)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="7" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж контакт" data-en="Socket Installation">Монтаж контакт</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">7 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="7" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж ключ" data-en="Switch Installation">Монтаж ключ</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">7 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="8" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Двоен контакт" data-en="Double Socket">Двоен контакт</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">8 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж плафон и лампа" data-en="Ceiling Light Installation">Монтаж плафон и лампа</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж LED панел" data-en="LED Panel Installation">Монтаж LED панел</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="10" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж луничка" data-en="Spotlight Installation">Монтаж луничка</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">10 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж полилей" data-en="Chandelier Installation">Монтаж полилей</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="80" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж голям полилей" data-en="Large Chandelier Installation">Монтаж голям полилей</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">80 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="5" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж LED лента (линеен метър)" data-en="LED Strip Installation (linear meter)">Монтаж LED лента (линеен метър)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">5 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Датчик за движение" data-en="Motion Sensor">Датчик за движение</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Вентилатор за баня" data-en="Bathroom Fan">Вентилатор за баня</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Бойлерно табло" data-en="Boiler Panel">Бойлерно табло</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="10" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Автоматичен прекъсвач" data-en="Circuit Breaker">Автоматичен прекъсвач</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">10 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="20" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Дефектнотокова защита (ДТЗ)" data-en="Residual Current Device (RCD)">Дефектнотокова защита (ДТЗ)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">20 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="150" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Смяна на табло" data-en="Panel Replacement">Смяна на табло</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">150 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Монтаж кутия табло" data-en="Panel Box Installation">Монтаж кутия табло</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="3.5" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Изтегляне на кабел (линеен метър)" data-en="Cable Pulling (linear meter)">Изтегляне на кабел (линеен метър)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">3.5 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="4.5" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Кабел в гофре (линеен метър)" data-en="Cable in Conduit (linear meter)">Кабел в гофре (линеен метър)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">4.5 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="2" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Кабел канал (линеен метър)" data-en="Cable Channel (linear meter)">Кабел канал (линеен метър)</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">2 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="15" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Разклонителна кутия" data-en="Junction Box">Разклонителна кутия</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">15 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Нова Ел. точка" data-en="New Electrical Point">Нова Ел. точка</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="30" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Нова осветителна точка" data-en="New Lighting Point">Нова осветителна точка</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">30 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="35" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Нова точка за контакт" data-en="New Socket Point">Нова точка за контакт</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">35 €</span>
+                        </label>
+
+                        <label class="flex items-center justify-between gap-3 p-2.5 rounded-xl bg-slate-950 border border-slate-800 hover:border-brand-electric/50 cursor-pointer transition-all">
+                            <span class="flex items-center gap-3">
+                                <input type="checkbox" class="calc-checkbox w-4 h-4 accent-brand-amber shrink-0" data-price="50" onchange="calculatePrice()">
+                                <span class="text-xs font-semibold text-slate-200" data-bg="Повикване" data-en="Service Call-out">Повикване</span>
+                            </span>
+                            <span class="text-xs font-bold text-brand-amber font-tech whitespace-nowrap">50 €</span>
+                        </label>
                     </div>
                 </div>
 
-                <div class="md:col-span-5 bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center">
+                <div class="md:col-span-5 bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center md:sticky md:top-6">
                     <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2" data-bg="Приблизителна Цена" data-en="Estimated Cost">Приблизителна Цена</span>
                     <div class="my-3">
-                        <span id="price-result" class="text-4xl font-black text-brand-amber font-tech">1500</span>
-                        <span id="currency-label" class="text-lg font-bold text-slate-300 ml-1">лв.</span>
+                        <span id="price-result" class="text-4xl font-black text-brand-amber font-tech">0</span>
+                        <span id="currency-label" class="text-lg font-bold text-slate-300 ml-1">€</span>
                     </div>
                     <p class="text-[10px] text-slate-500 leading-relaxed mb-4" data-bg="* Крайната оферта се определя след оглед." data-en="* Final quote provided after on-site inspection.">* Крайната оферта се определя след оглед.</p>
                     <a href="tel:0884724400" class="block w-full py-2.5 rounded-xl bg-brand-amber hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all">
@@ -473,12 +741,14 @@
         }
 
         function calculatePrice() {
-            const area = parseFloat(document.getElementById('calc-area').value) || 0;
-            const rate = parseFloat(document.getElementById('calc-type').value);
-            const total = Math.round(area * rate);
-            
-            document.getElementById('price-result').innerText = total;
-            document.getElementById('currency-label').innerText = currentLang === 'bg' ? 'лв.' : 'BGN';
+            const checkboxes = document.querySelectorAll('.calc-checkbox:checked');
+            let total = 0;
+            checkboxes.forEach(cb => {
+                total += parseFloat(cb.getAttribute('data-price')) || 0;
+            });
+
+            document.getElementById('price-result').innerText = total % 1 === 0 ? total : total.toFixed(1);
+            document.getElementById('currency-label').innerText = currentLang === 'bg' ? '€' : 'EURO';
         }
 
         function handleContact(e) {
@@ -495,6 +765,3 @@
     </script>
 </body>
 </html>
-```
-
-Ето сайта с интегрираното превю в интерактивния прозорец. Файлът съдържа пълната BG/EN функционалност, калкулатора за цени, аудио ефектите и светкавичния преход при превключване на менютата.
