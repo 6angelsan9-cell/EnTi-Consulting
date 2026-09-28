@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ен Ти Консултинг ЕООД | Градове</title>
+    <title>Градове | Ен Ти Консултинг ЕООД</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <canvas id="lightning-canvas"></canvas>
 
     <header>
@@ -19,15 +21,15 @@
     </header>
 
     <nav>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('index.html'); return false;" data-bg="За Нас" data-en="About Us">За Нас</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('services.html'); return false;" data-bg="Услуги" data-en="Services">Услуги</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('calculator.html'); return false;" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
-        <a class="nav-btn active" href="#" onclick="navigateWithEffect('locations.html'); return false;" data-bg="Градове" data-en="Locations">Градове</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('contact.html'); return false;" data-bg="Контакти" data-en="Contacts">Контакти</a>
+        <a href="index.html" class="nav-btn" data-bg="За Нас" data-en="About Us">За Нас</a>
+        <a href="services.html" class="nav-btn" data-bg="Услуги" data-en="Services">Услуги</a>
+        <a href="calculator.html" class="nav-btn" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
+        <a href="locations.html" class="nav-btn active" data-bg="Градове" data-en="Locations">Градове</a>
+        <a href="contact.html" class="nav-btn" data-bg="Контакти" data-en="Contacts">Контакти</a>
     </nav>
 
     <main>
-        <div class="content-box">
+        <div class="tab-content active">
             <h2 data-bg="Обслужвани Региони" data-en="Service Areas">Обслужвани Региони</h2>
             <p data-bg="Обслужваме следните градове и всички околни населени места:" data-en="We service the following cities and surrounding areas:">Обслужваме следните градове и всички околни населени места:</p>
             <h3 style="color: var(--accent-cyan); font-size: 20px; line-height: 2;" 

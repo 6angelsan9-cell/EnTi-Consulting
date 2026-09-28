@@ -3,11 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ен Ти Консултинг ЕООД | Услуги</title>
+    <title>Услуги | Ен Ти Консултинг ЕООД</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <canvas id="lightning-canvas"></canvas>
 
     <header>
@@ -19,34 +21,24 @@
     </header>
 
     <nav>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('index.html'); return false;" data-bg="За Нас" data-en="About Us">За Нас</a>
-        <a class="nav-btn active" href="#" onclick="navigateWithEffect('services.html'); return false;" data-bg="Услуги" data-en="Services">Услуги</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('calculator.html'); return false;" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('locations.html'); return false;" data-bg="Градове" data-en="Locations">Градове</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('contact.html'); return false;" data-bg="Контакти" data-en="Contacts">Контакти</a>
+        <a href="index.html" class="nav-btn" data-bg="За Нас" data-en="About Us">За Нас</a>
+        <a href="services.html" class="nav-btn active" data-bg="Услуги" data-en="Services">Услуги</a>
+        <a href="calculator.html" class="nav-btn" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
+        <a href="locations.html" class="nav-btn" data-bg="Градове" data-en="Locations">Градове</a>
+        <a href="contact.html" class="nav-btn" data-bg="Контакти" data-en="Contacts">Контакти</a>
     </nav>
 
     <main>
-        <div class="content-box">
-            <h2 data-bg="Нашите Услуги" data-en="Our Services">Нашите Услуги</h2>
-            <div class="service-grid">
-                <div class="service-card">
-                    <h3 data-bg="⚡ Изграждане и Ремонт" data-en="⚡ Installation & Repair">⚡ Изграждане и Ремонт</h3>
-                    <p data-bg="Пълно изграждане на нови ел. инсталации или ремонт на стари." data-en="Complete installation of new electrical systems or repair of old ones.">Пълно изграждане на нови ел. инсталации или ремонт на стари.</p>
-                </div>
-                <div class="service-card">
-                    <h3 data-bg="🔧 Смяна на Табла" data-en="🔧 Switchboard Replacement">🔧 Смяна на Табла</h3>
-                    <p data-bg="Подмяна на стари бушони с нови автоматични предпазители." data-en="Replacement of old fuses with modern circuit breakers.">Подмяна на стари бушони с нови автоматични предпазители.</p>
-                </div>
-                <div class="service-card">
-                    <h3 data-bg="💡 Монтаж на Осветление" data-en="💡 Lighting Installation">💡 Монтаж на Осветление</h3>
-                    <p data-bg="Монтаж на полилеи, LED ленти, ключове и контакти." data-en="Installation of chandeliers, LED strips, switches and sockets.">Монтаж на полилеи, LED ленти, ключове и контакти.</p>
-                </div>
-                <div class="service-card">
-                    <h3 data-bg="🚨 Аварии и Ремонти" data-en="🚨 Emergency Repairs">🚨 Аварии и Ремонти</h3>
-                    <p data-bg="Бързо отстраняване на къси съединения и авариен сервиз." data-en="Fast response to short circuits and electrical failures.">Бързо отстраняване на къси съединения и авариен сервиз.</p>
-                </div>
-            </div>
+        <div class="tab-content active">
+            <h2 data-bg="Гама от Услуги" data-en="Service Range">Гама от Услуги</h2>
+            <p data-bg="Предлагаме пълен спектър от електромонтажни дейности по проект или индивидуално задание."
+               data-en="We offer a full spectrum of electrical installation work tailored to your custom project.">
+               Предлагаме пълен спектър от електромонтажни дейности по проект или индивидуално задание.
+            </p>
+            <p data-bg="За да изчислите точно офертата за вашия обект, преминете към меню 'Калкулатор'."
+               data-en="To calculate an accurate quote for your project, please proceed to the 'Calculator' tab.">
+               За да изчислите точно офертата за вашия обект, преминете към меню <a href="calculator.html" style="color: var(--accent-yellow); font-weight: bold; text-decoration: underline;">"Калкулатор"</a>.
+            </p>
         </div>
     </main>
 

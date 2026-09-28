@@ -3,11 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ен Ти Консултинг ЕООД | Калкулатор</title>
+    <title>Калкулатор | Ен Ти Консултинг ЕООД</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <canvas id="lightning-canvas"></canvas>
 
     <header>
@@ -19,26 +22,46 @@
     </header>
 
     <nav>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('index.html'); return false;" data-bg="За Нас" data-en="About Us">За Нас</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('services.html'); return false;" data-bg="Услуги" data-en="Services">Услуги</a>
-        <a class="nav-btn active" href="#" onclick="navigateWithEffect('calculator.html'); return false;" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('locations.html'); return false;" data-bg="Градове" data-en="Locations">Градове</a>
-        <a class="nav-btn" href="#" onclick="navigateWithEffect('contact.html'); return false;" data-bg="Контакти" data-en="Contacts">Контакти</a>
+        <a href="index.html" class="nav-btn" data-bg="За Нас" data-en="About Us">За Нас</a>
+        <a href="services.html" class="nav-btn" data-bg="Услуги" data-en="Services">Услуги</a>
+        <a href="calculator.html" class="nav-btn active" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
+        <a href="locations.html" class="nav-btn" data-bg="Градове" data-en="Locations">Градове</a>
+        <a href="contact.html" class="nav-btn" data-bg="Контакти" data-en="Contacts">Контакти</a>
     </nav>
 
     <main>
-        <div class="content-box">
-            <h2 data-bg="Интерактивен Калкулатор за Цени" data-en="Interactive Price Calculator">Интерактивен Калкулатор за Цени</h2>
-            <p data-bg="Изберете необходимите услуги и въведете количествата (бр. или линейни метри):"
-               data-en="Select the required services and specify quantities (pcs or linear meters):">
-               Изберете необходимите услуги и въведете количествата (бр. или линейни метри):
-            </p>
+        <div class="tab-content active">
+            <div class="calc-header">
+                <div>
+                    <h2 data-bg="Интерактивен Калкулатор" data-en="Interactive Calculator">Интерактивен Калкулатор</h2>
+                    <p data-bg="Изберете услугите и получете мигновена оферта" data-en="Select services to get an instant estimate">Изберете услугите и получете мигновена оферта</p>
+                </div>
+                <div class="search-box">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="calc-search" placeholder="Търсене на услуга..." oninput="filterServices()">
+                </div>
+            </div>
 
-            <div id="calc-container"></div>
+            <!-- Филтри за категории -->
+            <div class="calc-cats-bar" id="calc-cats-bar"></div>
 
+            <!-- Решетка с услуги -->
+            <div id="calc-container" class="calc-grid"></div>
+
+            <!-- Фиксирана лента за обща сума -->
             <div class="total-sticky">
-                <div class="total-title" data-bg="Обща сума:" data-en="Total Amount:">Обща сума:</div>
-                <div class="total-amount" id="grand-total">0 €</div>
+                <div class="total-info">
+                    <span class="total-title" data-bg="Обща сума:" data-en="Total Amount:">Обща сума:</span>
+                    <span class="total-amount" id="grand-total">0 €</span>
+                </div>
+                <div class="calc-actions">
+                    <button class="btn-action btn-pdf" onclick="generatePDF()">
+                        <i class="fa-solid fa-file-pdf"></i> <span data-bg="Свали PDF" data-en="Download PDF">Свали PDF</span>
+                    </button>
+                    <button class="btn-action btn-email" onclick="sendOfferEmail()">
+                        <i class="fa-solid fa-paper-plane"></i> <span data-bg="Изпрати запитване" data-en="Send Request">Изпрати запитване</span>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
