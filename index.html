@@ -4,46 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ен Ти Консултинг ЕООД | Електроуслуги</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        brand: {
-                            dark: '#0a0f1d',
-                            card: '#111827',
-                            electric: '#38bdf8',
-                            amber: '#f59e0b',
-                            emerald: '#10b981'
-                        }
-                    },
-                    fontFamily: {
-                        sans: ['Montserrat', 'sans-serif'],
-                        tech: ['Orbitron', 'sans-serif'],
-                    }
-                }
-            }
-        }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #0a0f1d;
-            color: #f8fafc;
+        :root {
+            --bg-dark: #0a0f1d;
+            --panel-bg: #111827;
+            --card-bg: #1e293b;
+            --accent-yellow: #f59e0b;
+            --accent-cyan: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
         }
 
-        /* Lightning Canvas Overlay */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            position: relative;
+        }
+
         #lightning-canvas {
             position: fixed;
             top: 0;
@@ -55,339 +45,516 @@
             display: none;
         }
 
-        /* Tab switch transitions */
-        .tab-content {
-            display: none;
-            opacity: 0;
-            transform: translateY(8px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-        }
-        .tab-content.active {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+        header {
+            background: rgba(17, 24, 39, 0.95);
+            border-bottom: 2px solid var(--accent-yellow);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
         }
 
-        /* Neon Glow Effects */
-        .neon-border-amber {
-            box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+        .logo {
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent-yellow);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .bulb-glow-on {
-            box-shadow: 0 0 50px rgba(245, 158, 11, 0.6), inset 0 0 15px rgba(245, 158, 11, 0.4);
-            border-color: #f59e0b !important;
+
+        .top-controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn-ctrl {
+            background: #1e293b;
+            border: 1px solid var(--accent-cyan);
+            color: #fff;
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .btn-ctrl:hover {
+            background: var(--accent-cyan);
+            color: #000;
+            box-shadow: 0 0 15px var(--accent-cyan);
+        }
+
+        nav {
+            background: #111827;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border-bottom: 1px solid #1e293b;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: var(--text-main);
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+
+        .nav-btn.active {
+            background: var(--accent-yellow);
+            color: #000;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 20px rgba(245, 158, 11, 0.5);
+            transform: translateY(-2px);
+        }
+
+        main {
+            flex: 1;
+            max-width: 1100px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        .tab-content {
+            display: none;
+            background: var(--panel-bg);
+            border: 1px solid #1e293b;
+            border-radius: 16px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.4s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: var(--accent-yellow);
+            font-size: 26px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #1e293b;
+            padding-bottom: 10px;
+        }
+
+        p {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+
+        .service-category {
+            margin-bottom: 30px;
+            background: rgba(30, 41, 59, 0.5);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .service-category h3 {
+            color: var(--accent-cyan);
+            font-size: 18px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .calc-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 12px 15px;
+            background: var(--card-bg);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            gap: 15px;
+            flex-wrap: wrap;
+            border: 1px solid transparent;
+            transition: all 0.2s ease;
+        }
+
+        .calc-item:hover {
+            border-color: var(--accent-cyan);
+        }
+
+        .calc-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex: 1;
+            min-width: 240px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+
+        .calc-label input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: var(--accent-yellow);
+            cursor: pointer;
+        }
+
+        .calc-options {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .qty-input {
+            width: 70px;
+            padding: 6px 10px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 6px;
+            text-align: center;
+            font-weight: 700;
+        }
+
+        .select-material {
+            padding: 6px 10px;
+            background: #0f172a;
+            border: 1px solid var(--border-color);
+            color: #fff;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        .item-price {
+            font-weight: 800;
+            color: var(--accent-yellow);
+            min-width: 70px;
+            text-align: right;
+        }
+
+        .total-sticky {
+            position: sticky;
+            bottom: 20px;
+            background: rgba(17, 24, 39, 0.95);
+            border: 2px solid var(--accent-yellow);
+            padding: 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+            margin-top: 25px;
+        }
+
+        .total-title {
+            font-size: 18px;
+            font-weight: 800;
+        }
+
+        .total-amount {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--accent-yellow);
+            text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+        }
+
+        .phone-btn {
+            display: inline-block;
+            background: #16a34a;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 18px;
+            box-shadow: 0 0 20px rgba(22, 163, 74, 0.4);
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            color: var(--text-muted);
+            font-size: 14px;
+            border-top: 1px solid #1e293b;
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-brand-amber selection:text-slate-950">
+<body>
 
-    <!-- Interactive Lightning FX Canvas -->
     <canvas id="lightning-canvas"></canvas>
 
-    <!-- Header Navigation -->
-    <header class="sticky top-0 z-50 bg-slate-950/90 backdrop-blur-md border-b border-slate-800">
-        <div class="max-w-6xl mx-auto px-4 h-20 flex items-center justify-between">
-            
-            <!-- Logo -->
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-electric to-brand-amber flex items-center justify-center text-slate-950 font-black text-xl shadow-lg shadow-brand-electric/20">
-                    <i class="fa-solid fa-bolt"></i>
-                </div>
-                <div>
-                    <span class="text-base sm:text-lg font-black tracking-wide text-white block leading-none font-tech">
-                        Ен Ти Консултинг <span class="text-brand-amber">ЕООД</span>
-                    </span>
-                    <span class="text-[11px] font-bold text-brand-electric uppercase tracking-wider">Електроуслуги • Емил Николов</span>
-                </div>
-            </div>
+    <header>
+        <div class="logo">⚡ Ен Ти Консултинг ЕООД</div>
+        <div class="top-controls">
+            <button class="btn-ctrl" id="lang-btn" onclick="toggleLanguage()">🇧🇬 BG / EN 🇬🇧</button>
+            <button class="btn-ctrl" id="sound-btn" onclick="toggleSound()">🔊 Sound ON</button>
+        </div>
+    </header>
 
-            <!-- Top Utility Buttons -->
-            <div class="flex items-center gap-2 sm:gap-3">
-                <button id="lang-btn" onclick="toggleLanguage()" class="px-3 py-2 rounded-xl bg-slate-900 border border-slate-700 text-slate-200 hover:border-brand-electric text-xs font-bold transition-all flex items-center gap-1.5">
-                    <i class="fa-solid fa-globe text-brand-electric"></i>
-                    <span id="lang-text">BG / EN</span>
-                </button>
+    <nav>
+        <button class="nav-btn active" onclick="switchTab('about', this)" data-bg="За Нас" data-en="About Us">За Нас</button>
+        <button class="nav-btn" onclick="switchTab('services', this)" data-bg="Услуги" data-en="Services">Услуги</button>
+        <button class="nav-btn" onclick="switchTab('calculator', this)" data-bg="Калкулатор" data-en="Calculator">Калкулатор</button>
+        <button class="nav-btn" onclick="switchTab('locations', this)" data-bg="Градове" data-en="Locations">Градове</button>
+        <button class="nav-btn" onclick="switchTab('contact', this)" data-bg="Контакти" data-en="Contacts">Контакти</button>
+    </nav>
 
-                <button id="sound-btn" onclick="toggleSound()" class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-700 text-brand-electric hover:border-brand-electric flex items-center justify-center transition-all" title="Звуков ефект">
-                    <i class="fa-solid fa-volume-high text-xs" id="sound-icon"></i>
-                </button>
+    <main>
+        <!-- ABOUT -->
+        <div id="about" class="tab-content active">
+            <h2 data-bg="Професионални Електроуслуги" data-en="Professional Electrical Services">Професионални Електроуслуги</h2>
+            <p data-bg="Фирма 'Ен Ти Консултинг ЕООД' с електротехник Емил Николов предлага бързи, сигурни и надеждни решения за вашия дом, вила или офис."
+               data-en="Ен Ти Консултинг ЕООД with electrician Emil Nikolov offers fast, safe, and reliable electrical solutions for your home or office.">
+               Фирма "Ен Ти Консултинг ЕООД" с електротехник Емил Николов предлага бързи, сигурни и надеждни решения за вашия дом, вила или офис.
+            </p>
+            <p style="font-weight: 800; color: var(--accent-yellow);" 
+               data-bg="💡 'Имаш идея, ние ще я реализираме!'" 
+               data-en="💡 'You have an idea, we will realize it!'">
+               💡 "Имаш идея, ние ще я реализираме!"
+            </p>
+        </div>
 
-                <a href="tel:0884724400" class="hidden sm:flex items-center gap-2 bg-brand-amber hover:bg-amber-400 text-slate-950 font-extrabold px-4 py-2 rounded-xl text-xs transition-all shadow-md">
-                    <i class="fa-solid fa-phone"></i>
-                    0884 72 44 00
-                </a>
+        <!-- SERVICES OVERVIEW -->
+        <div id="services" class="tab-content">
+            <h2 data-bg="Гама от Услуги" data-en="Service Range">Гама от Услуги</h2>
+            <p data-bg="Предлагаме пълен спектър от електромонтажни дейности по проект или индивидуално задание."
+               data-en="We offer a full spectrum of electrical installation work tailored to your custom project.">
+               Предлагаме пълен спектър от електромонтажни дейности по проект или индивидуално задание.
+            </p>
+            <p data-bg="За да изчислите точно офертата за вашия обект, преминете към меню 'Калкулатор'."
+               data-en="To calculate an accurate quote for your project, please proceed to the 'Calculator' tab.">
+               За да изчислите точно офертата за вашия обект, преминете към меню "Калкулатор".
+            </p>
+        </div>
+
+        <!-- CALCULATOR -->
+        <div id="calculator" class="tab-content">
+            <h2 data-bg="Интерактивен Калкулатор за Цени" data-en="Interactive Price Calculator">Интерактивен Калкулатор за Цени</h2>
+            <p data-bg="Изберете необходимите услуги и въведете количествата (бр. или линейни метри):"
+               data-en="Select the required services and specify quantities (pcs or linear meters):">
+               Изберете необходимите услуги и въведете количествата (бр. или линейни метри):
+            </p>
+
+            <div id="calc-container"></div>
+
+            <div class="total-sticky">
+                <div class="total-title" data-bg="Обща сума:" data-en="Total Amount:">Обща сума:</div>
+                <div class="total-amount" id="grand-total">0 €</div>
             </div>
         </div>
 
-        <!-- Tab Controls -->
-        <nav class="bg-brand-card/90 border-t border-slate-800/80 px-2 py-2">
-            <div class="max-w-4xl mx-auto flex items-center justify-around gap-1 overflow-x-auto">
-                <button onclick="switchTab('about', this)" class="nav-btn active px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-brand-amber bg-brand-amber/10 text-brand-amber" data-bg="За Нас" data-en="About Us">
-                    За Нас
-                </button>
-                <button onclick="switchTab('services', this)" class="nav-btn px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-transparent text-slate-400 hover:text-white" data-bg="Услуги" data-en="Services">
-                    Услуги
-                </button>
-                <button onclick="switchTab('calculator', this)" class="nav-btn px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-transparent text-slate-400 hover:text-white" data-bg="Калкулатор" data-en="Calculator">
-                    Калкулатор
-                </button>
-                <button onclick="switchTab('locations', this)" class="nav-btn px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-transparent text-slate-400 hover:text-white" data-bg="Градове" data-en="Locations">
-                    Градове
-                </button>
-                <button onclick="switchTab('contact', this)" class="nav-btn px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-transparent text-slate-400 hover:text-white" data-bg="Контакти" data-en="Contacts">
-                    Контакти
-                </button>
-            </div>
-        </nav>
-    </header>
+        <!-- LOCATIONS -->
+        <div id="locations" class="tab-content">
+            <h2 data-bg="Обслужвани Региони" data-en="Service Areas">Обслужвани Региони</h2>
+            <p data-bg="Обслужваме следните градове и всички околни населени места:" data-en="We service the following cities and surrounding areas:">Обслужваме следните градове и всички околни населени места:</p>
+            <h3 style="color: var(--accent-cyan); font-size: 20px; line-height: 2;" 
+               data-bg="📍 Бургас, Варна, Несебър, Поморие, Слънчев Бряг, Созопол" 
+               data-en="📍 Burgas, Varna, Nesebar, Pomorie, Sunny Beach, Sozopol">
+               📍 Бургас, Варна, Несебър, Поморие, Слънчев Бряг, Созопол
+            </h3>
+        </div>
 
-    <!-- Main Content Display -->
-    <main class="max-w-5xl mx-auto px-4 py-8 sm:py-12 flex-grow w-full">
-
-        <!-- ABOUT TAB -->
-        <section id="about" class="tab-content active space-y-8">
-            <div class="grid md:grid-cols-12 gap-8 items-center bg-brand-card border border-slate-800 p-6 sm:p-10 rounded-3xl shadow-2xl">
-                <div class="md:col-span-7 space-y-4">
-                    <span class="inline-block px-3 py-1 rounded-full bg-slate-900 border border-brand-electric/40 text-brand-electric text-xs font-bold uppercase tracking-wider" data-bg="Електроинженерство" data-en="Electrical Engineering">
-                        Електроинженерство
-                    </span>
-
-                    <h1 class="text-3xl sm:text-4xl font-black text-white font-tech leading-tight" data-bg="Сигурност и Качество за Вашия Дом" data-en="Safety & Quality for Your Home">
-                        Сигурност и Качество за Вашия Дом
-                    </h1>
-
-                    <p class="text-slate-300 text-xs sm:text-sm leading-relaxed" data-bg="Фирма 'Ен Ти Консултинг ЕООД' с електротехник Емил Николов предлага бързи, сигурни и надеждни електроуслуги за апартаменти, къщи, офиси и търговски обекти." data-en="Ен Ти Консултинг ЕООД with electrician Emil Nikolov provides fast, safe, and reliable electrical services for apartments, houses, offices, and commercial spaces.">
-                        Фирма "Ен Ти Консултинг ЕООД" с електротехник Емил Николов предлага бързи, сигурни и надеждни електроуслуги за апартаменти, къщи, офиси и търговски обекти.
-                    </p>
-
-                    <div class="p-4 rounded-2xl bg-slate-950 border border-brand-amber/30 text-brand-amber text-xs font-black uppercase tracking-wider shadow-inner" data-bg="💡 'Имаш идея, ние ще я реализираме!'" data-en="💡 'You have an idea, we will realize it!'">
-                        💡 "Имаш идея, ние ще я реализираме!"
-                    </div>
-
-                    <a href="tel:0884724400" class="inline-flex items-center gap-2 bg-brand-amber hover:bg-amber-400 text-slate-950 font-black px-6 py-3 rounded-xl text-xs uppercase tracking-wider transition-all shadow-lg">
-                        <i class="fa-solid fa-phone"></i>
-                        0884 72 44 00 (Емил Николов)
-                    </a>
-                </div>
-
-                <!-- Interactive Light Switch Tester -->
-                <div class="md:col-span-5 flex justify-center">
-                    <div class="w-full max-w-xs bg-slate-950 border border-slate-800 rounded-2xl p-6 text-center">
-                        <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-4" data-bg="Тест на Напрежението" data-en="Voltage Test">Тест на Напрежението</span>
-                        
-                        <div id="demo-bulb" onclick="toggleDemoBulb()" class="w-36 h-36 mx-auto rounded-full border-2 border-slate-800 bg-slate-900 flex flex-col items-center justify-center cursor-pointer transition-all duration-300 mb-4">
-                            <i id="demo-bulb-icon" class="fa-solid fa-lightbulb text-4xl text-slate-600 mb-2"></i>
-                            <span id="demo-bulb-text" class="text-xs font-extrabold italic text-slate-500">Ен Ти Консултинг</span>
-                        </div>
-
-                        <div class="text-xs font-bold text-slate-300 flex items-center justify-between px-3 py-2 bg-slate-900 rounded-lg">
-                            <span data-bg="Състояние:" data-en="Status:">Състояние:</span>
-                            <span id="voltage-display" class="text-brand-electric font-tech">0V (OFF)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- SERVICES TAB -->
-        <section id="services" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <h2 class="text-2xl font-black text-white font-tech" data-bg="Нашите Услуги" data-en="Our Services">Нашите Услуги</h2>
-                <p class="text-xs text-slate-400 mt-1" data-bg="Професионални решения за всяка ситуация" data-en="Professional solutions for every situation">Професионални решения за всяка ситуация</p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 gap-4">
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 hover:border-brand-electric/50 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-brand-electric/10 text-brand-electric flex items-center justify-center text-lg font-bold mb-3">
-                        <i class="fa-solid fa-diagram-project"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-1" data-bg="Изграждане & Ремонт" data-en="Installation & Repairs">Изграждане & Ремонт</h3>
-                    <p class="text-xs text-slate-400" data-bg="Цялостно окабеляване на нови сгради, реконструкция на стари ел. инсталации." data-en="Complete wiring of new buildings and reconstruction of old electrical systems.">Цялостно окабеляване на нови сгради, реконструкция на стари ел. инсталации.</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 hover:border-brand-amber/50 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-brand-amber/10 text-brand-amber flex items-center justify-center text-lg font-bold mb-3">
-                        <i class="fa-solid fa-box-archive"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-1" data-bg="Смяна на Ел. Табла" data-en="Switchboard Replacement">Смяна на Ел. Табла</h3>
-                    <p class="text-xs text-slate-400" data-bg="Подмяна на стари винтови предпазители с нови автоматични бушони и ДТЗ защити." data-en="Replacement of old fuses with modern automatic circuit breakers and safety units.">Подмяна на стари винтови предпазители с нови автоматични бушони и ДТЗ защити.</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 hover:border-brand-electric/50 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-brand-electric/10 text-brand-electric flex items-center justify-center text-lg font-bold mb-3">
-                        <i class="fa-solid fa-lightbulb"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-1" data-bg="Осветление & LED" data-en="Lighting & LED">Осветление & LED</h3>
-                    <p class="text-xs text-slate-400" data-bg="Монтаж на полилеи, LED ленти, ключове, контакти и градински осветителни тела." data-en="Installation of chandeliers, LED strip lights, switches, sockets, and garden lighting.">Монтаж на полилеи, LED ленти, ключове, контакти и градински осветителни тела.</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 hover:border-brand-amber/50 transition-all">
-                    <div class="w-10 h-10 rounded-xl bg-brand-amber/10 text-brand-amber flex items-center justify-center text-lg font-bold mb-3">
-                        <i class="fa-solid fa-triangle-exclamation"></i>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-1" data-bg="Аварии & Ремонти" data-en="Emergency Service">Аварии & Ремонти</h3>
-                    <p class="text-xs text-slate-400" data-bg="Бърза диагностика при отпаднало захранване, къси съединения и изгорели кабели." data-en="Fast diagnostic and repair of short circuits, power outages, and damaged cables.">Бърза диагностика при отпаднало захранване, къси съединения и изгорели кабели.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CALCULATOR TAB -->
-        <section id="calculator" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <h2 class="text-2xl font-black text-white font-tech" data-bg="Ориентировъчен Калкулатор" data-en="Price Estimator">Ориентировъчен Калкулатор</h2>
-                <p class="text-xs text-slate-400 mt-1" data-bg="Калкулирайте бързо приблизителната стойност" data-en="Quickly calculate an estimated cost">Калкулирайте бързо приблизителната стойност</p>
-            </div>
-
-            <div class="bg-brand-card border border-slate-800 p-6 sm:p-8 rounded-3xl grid md:grid-cols-12 gap-6 items-center">
-                <div class="md:col-span-7 space-y-5">
-                    <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-2" data-bg="Площ на имота (кв. м):" data-en="Property Area (sq. m):">Площ на имота (кв. м):</label>
-                        <input type="number" id="calc-area" value="60" oninput="calculatePrice()" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white font-tech text-sm focus:border-brand-electric focus:outline-none">
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-bold text-slate-300 mb-2" data-bg="Основен тип услуга:" data-en="Service Type:">Основен тип услуга:</label>
-                        <select id="calc-type" onchange="calculatePrice()" class="w-full px-4 py-2.5 rounded-xl bg-slate-950 border border-slate-800 text-white text-xs font-semibold focus:border-brand-electric focus:outline-none">
-                            <option value="12" data-bg="Частичен ремонт / Монтаж на осветителни тела" data-en="Minor Repairs / Lighting Assembly">Частичен ремонт / Монтаж на осветителни тела</option>
-                            <option value="25" selected data-bg="Цялостно изграждане / Реконструкция" data-en="Full Electrical Installation">Цялостно изграждане / Реконструкция</option>
-                            <option value="40" data-bg="Спешна диагностика + Подмяна на Ел. Табло" data-en="Emergency Diagnostic + Switchboard Replacement">Спешна диагностика + Подмяна на Ел. Табло</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="md:col-span-5 bg-slate-950 p-6 rounded-2xl border border-slate-800 text-center">
-                    <span class="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 block mb-2" data-bg="Приблизителна Цена" data-en="Estimated Cost">Приблизителна Цена</span>
-                    <div class="my-3">
-                        <span id="price-result" class="text-4xl font-black text-brand-amber font-tech">1500</span>
-                        <span id="currency-label" class="text-lg font-bold text-slate-300 ml-1">лв.</span>
-                    </div>
-                    <p class="text-[10px] text-slate-500 leading-relaxed mb-4" data-bg="* Крайната оферта се определя след оглед." data-en="* Final quote provided after on-site inspection.">* Крайната оферта се определя след оглед.</p>
-                    <a href="tel:0884724400" class="block w-full py-2.5 rounded-xl bg-brand-amber hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all">
-                        Заяви Оглед
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- LOCATIONS TAB -->
-        <section id="locations" class="tab-content space-y-6">
-            <div class="text-center max-w-xl mx-auto mb-6">
-                <h2 class="text-2xl font-black text-white font-tech" data-bg="Обслужвани Градове" data-en="Service Locations">Обслужвани Градове</h2>
-                <p class="text-xs text-slate-400 mt-1" data-bg="Обслужване на място в Бургас и Черноморието" data-en="On-site service in Burgas and the Black Sea region">Обслужване на място в Бургас и Черноморието</p>
-            </div>
-
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 text-center">
-                    <i class="fa-solid fa-city text-brand-amber text-2xl mb-2"></i>
-                    <h3 class="text-base font-bold text-white">Бургас</h3>
-                    <p class="text-xs text-slate-400 mt-1" data-bg="Всички квартали и вилни зони" data-en="All districts and suburban areas">Всички квартали и вилни зони</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 text-center">
-                    <i class="fa-solid fa-umbrella-beach text-brand-electric text-2xl mb-2"></i>
-                    <h3 class="text-base font-bold text-white">Несебър & Сл. Бряг</h3>
-                    <p class="text-xs text-slate-400 mt-1" data-bg="Хотели, комплекси и частни имоти" data-en="Hotels, resorts, and private properties">Хотели, комплекси и частни имоти</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 text-center">
-                    <i class="fa-solid fa-water text-brand-amber text-2xl mb-2"></i>
-                    <h3 class="text-base font-bold text-white">Поморие & Созопол</h3>
-                    <p class="text-xs text-slate-400 mt-1" data-bg="Жилищни сгради и ваканционни имоти" data-en="Residential buildings and holiday homes">Жилищни сгради и ваканционни имоти</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 text-center">
-                    <i class="fa-solid fa-ship text-brand-electric text-2xl mb-2"></i>
-                    <h3 class="text-base font-bold text-white">Варна</h3>
-                    <p class="text-xs text-slate-400 mt-1" data-bg="По предварителна уговорка за проекти" data-en="By prior agreement for major projects">По предварителна уговорка за проекти</p>
-                </div>
-
-                <div class="bg-brand-card p-5 rounded-2xl border border-slate-800 text-center sm:col-span-2 lg:col-span-2">
-                    <i class="fa-solid fa-location-dot text-brand-amber text-2xl mb-2"></i>
-                    <h3 class="text-base font-bold text-white" data-bg="Околни Населени Места" data-en="Surrounding Municipalities">Околни Населени Места</h3>
-                    <p class="text-xs text-slate-400 mt-1" data-bg="Обслужване на всички близки села, комплекси и вилни зони в региона." data-en="Coverage for all surrounding villages, resorts, and coastal areas.">Обслужване на всички близки села, комплекси и вилни зони в региона.</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- CONTACT TAB -->
-        <section id="contact" class="tab-content space-y-6">
-            <div class="bg-brand-card border border-slate-800 rounded-3xl p-6 sm:p-10 grid md:grid-cols-2 gap-8 items-center">
-                <div class="space-y-4">
-                    <span class="text-xs font-bold text-brand-amber uppercase tracking-widest block" data-bg="Директен Контакт" data-en="Direct Contact">Директен Контакт</span>
-                    <h2 class="text-2xl font-black text-white font-tech">Емил Николов</h2>
-                    <p class="text-xs text-slate-400">Управител на "Ен Ти Консултинг ЕООД"</p>
-
-                    <div class="space-y-3 pt-2">
-                        <a href="tel:0884724400" class="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-brand-amber transition-all">
-                            <div class="w-10 h-10 rounded-xl bg-brand-amber text-slate-950 flex items-center justify-center font-black">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-bold text-slate-400 uppercase block">Телефон</span>
-                                <span class="text-base font-bold text-white font-tech">0884 72 44 00</span>
-                            </div>
-                        </a>
-
-                        <a href="mailto:emil.st.nikolov@gmail.com" class="flex items-center gap-3 p-3.5 rounded-2xl bg-slate-950 border border-slate-800 hover:border-brand-electric transition-all">
-                            <div class="w-10 h-10 rounded-xl bg-brand-electric text-slate-950 flex items-center justify-center font-black">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <div>
-                                <span class="text-[10px] font-bold text-slate-400 uppercase block">Имейл</span>
-                                <span class="text-xs font-bold text-white">emil.st.nikolov@gmail.com</span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="bg-slate-950 p-6 rounded-2xl border border-slate-800">
-                    <h3 class="text-sm font-bold text-white mb-4" data-bg="Изпратете съобщение" data-en="Send a message">Изпратете съобщение</h3>
-                    <form onsubmit="handleContact(event)" class="space-y-3">
-                        <input type="text" required placeholder="Вашето Име" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-brand-electric focus:outline-none">
-                        <input type="tel" required placeholder="Телефон за връзка" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-brand-electric focus:outline-none">
-                        <textarea rows="3" required placeholder="Описание на проблема / запитване" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900 border border-slate-800 text-white text-xs focus:border-brand-electric focus:outline-none"></textarea>
-                        <button type="submit" class="w-full py-3 rounded-xl bg-brand-amber hover:bg-amber-400 text-slate-950 font-black text-xs uppercase tracking-wider transition-all" data-bg="Изпрати" data-en="Send Message">
-                            Изпрати
-                        </button>
-                    </form>
-                    <div id="contact-success" class="hidden mt-3 p-2.5 rounded-xl bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-center text-xs font-bold" data-bg="✓ Съобщението е изпратено успешно!" data-en="✓ Message sent successfully!">
-                        ✓ Съобщението е изпратено успешно!
-                    </div>
-                </div>
-            </div>
-        </section>
-
+        <!-- CONTACT -->
+        <div id="contact" class="tab-content">
+            <h2 data-bg="Свържете се с нас" data-en="Contact Us">Свържете се с нас</h2>
+            <p><strong>Електротехник:</strong> Емил Николов</p>
+            <p><strong>Фирма:</strong> Ен Ти Консултинг ЕООД</p>
+            <p><strong>Имейл:</strong> emil.st.nikolov@gmail.com</p>
+            <a href="tel:0884724400" class="phone-btn">📞 0884 72 44 00</a>
+        </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-slate-950 border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-        <p>&copy; 2026 Ен Ти Консултинг ЕООД. Всички права запазени.</p>
+    <footer>
+        © Ен Ти Консултинг ЕООД — Всички права запазени.
     </footer>
 
     <script>
         let currentLang = 'bg';
         let soundOn = true;
 
-        // Web Audio Synthesizer for Electrical Sound Effect
-        function playZapSound() {
-            if (!soundOn) return;
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const osc = audioCtx.createOscillator();
-                const gain = audioCtx.createGain();
+        const servicesData = [
+            {
+                cat_bg: "Монтаж на уреди и оборудване",
+                cat_en: "Appliance & Equipment Installation",
+                items: [
+                    { id: "boiler", bg: "Бойлер", en: "Water Heater / Boiler", price: 35, unit: "pcs" },
+                    { id: "oven", bg: "Фурна за вграждане", en: "Built-in Oven", price: 30, unit: "pcs" },
+                    { id: "hob", bg: "Котлони", en: "Electric Hobs", price: 30, unit: "pcs" },
+                    { id: "hood", bg: "Аспиратор", en: "Range Hood", price: 30, unit: "pcs" },
+                    { id: "three_phase", bg: "Трифазен уред", en: "Three-Phase Appliance", price: 60, unit: "pcs" },
+                    { id: "bath_fan", bg: "Вентилатор баня", en: "Bathroom Fan", price: 20, unit: "pcs" }
+                ]
+            },
+            {
+                cat_bg: "Пробиване на отвори и конзоли",
+                cat_en: "Drilling & Mounting Boxes",
+                items: [
+                    { id: "drill_socket", bg: "Монтаж конзола с пробиване отвор", en: "Socket Box Hole Drilling", prices: { gypsum: 6, brick: 8, concrete: 15 }, unit: "material" },
+                    { id: "drill_junction", bg: "За разпределителна кутия (пробиване)", en: "Junction Box Hole Drilling", prices: { gypsum: 8, brick: 10, concrete: 20 }, unit: "material" }
+                ]
+            },
+            {
+                cat_bg: "Ключове, контакти и осветителни тела",
+                cat_en: "Switches, Sockets & Lighting",
+                items: [
+                    { id: "socket", bg: "Монтаж контакт", en: "Socket Installation", price: 7, unit: "pcs" },
+                    { id: "switch", bg: "Монтаж ключ", en: "Switch Installation", price: 7, unit: "pcs" },
+                    { id: "double_socket", bg: "Двоен контакт", en: "Double Socket Installation", price: 8, unit: "pcs" },
+                    { id: "ceiling_light", bg: "Монтаж плафон и лампа", en: "Ceiling Light Installation", price: 20, unit: "pcs" },
+                    { id: "led_panel", bg: "Монтаж лед панел", en: "LED Panel Installation", price: 20, unit: "pcs" },
+                    { id: "spotlight", bg: "Монтаж луничка", en: "Spotlight / Downlight", price: 10, unit: "pcs" },
+                    { id: "chandelier", bg: "Монтаж полилей", en: "Chandelier Installation", price: 30, unit: "pcs" },
+                    { id: "large_chandelier", bg: "Монтаж голям полилей", en: "Large Chandelier Installation", price: 80, unit: "pcs" },
+                    { id: "led_strip", bg: "Монтаж лед лента (линеен метър)", en: "LED Strip Installation (linear meter)", price: 5, unit: "lm" },
+                    { id: "motion_sensor", bg: "Датчик движение", en: "Motion Sensor", price: 20, unit: "pcs" }
+                ]
+            },
+            {
+                cat_bg: "Ел. табла и защити",
+                cat_en: "Switchboards & Safety Devices",
+                items: [
+                    { id: "boiler_panel", bg: "Бойлерно табло", en: "Boiler Switchboard", price: 20, unit: "pcs" },
+                    { id: "circuit_breaker", bg: "Автоматичен прекъсвач", en: "Circuit Breaker", price: 10, unit: "pcs" },
+                    { id: "rcd", bg: "Дефектнотокова защита (ДТЗ)", en: "Residual Current Device (RCD)", price: 20, unit: "pcs" },
+                    { id: "panel_change", bg: "Смяна на табло", en: "Switchboard Replacement", price: 150, unit: "pcs" },
+                    { id: "panel_box", bg: "Монтаж кутия табло", en: "Switchboard Box Installation", price: 30, unit: "pcs" }
+                ]
+            },
+            {
+                cat_bg: "Кабели и точки",
+                cat_en: "Cables & Electrical Points",
+                items: [
+                    { id: "cable_pull", bg: "Изтегляне на кабел (линеен метър)", en: "Cable Pulling (linear meter)", price: 3.5, unit: "lm" },
+                    { id: "cable_conduit", bg: "Кабел в гофре (линеен метър)", en: "Cable in Conduit (linear meter)", price: 4.5, unit: "lm" },
+                    { id: "cable_channel", bg: "Кабел канал (линеен метър)", en: "Cable Trunking (linear meter)", price: 2, unit: "lm" },
+                    { id: "junction_box", bg: "Разклонителна кутия", en: "Junction Box Wiring", price: 15, unit: "pcs" },
+                    { id: "new_el_point", bg: "Нова Ел точка", en: "New Electrical Point", price: 30, unit: "pcs" },
+                    { id: "new_light_point", bg: "Нова осветителна точка", en: "New Lighting Point", price: 30, unit: "pcs" },
+                    { id: "new_socket_point", bg: "Нова точка за контакт", en: "New Socket Point", price: 35, unit: "pcs" },
+                    { id: "callout", bg: "Повикване / Посещение", en: "Emergency Call-out / Visit", price: 50, unit: "pcs" }
+                ]
+            }
+        ];
 
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(400, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(100, audioCtx.currentTime + 0.12);
+        function renderCalculator() {
+            const container = document.getElementById('calc-container');
+            container.innerHTML = '';
 
-                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.12);
+            servicesData.forEach((cat, cIdx) => {
+                const catDiv = document.createElement('div');
+                catDiv.className = 'service-category';
+                
+                const catTitle = document.createElement('h3');
+                catTitle.setAttribute('data-bg', cat.cat_bg);
+                catTitle.setAttribute('data-en', cat.cat_en);
+                catTitle.innerText = currentLang === 'bg' ? cat.cat_bg : cat.cat_en;
+                catDiv.appendChild(catTitle);
 
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
+                cat.items.forEach(item => {
+                    const itemDiv = document.createElement('div');
+                    itemDiv.className = 'calc-item';
 
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.12);
-            } catch(e) {}
+                    let optionsHtml = '';
+                    if (item.unit === 'material') {
+                        optionsHtml = `
+                            <select class="select-material" id="mat-${item.id}" onchange="recalculate()">
+                                <option value="gypsum">${currentLang === 'bg' ? 'Гипсокартон (6€)' : 'Gypsum (6€)'}</option>
+                                <option value="brick">${currentLang === 'bg' ? 'Тухла (8€)' : 'Brick (8€)'}</option>
+                                <option value="concrete">${currentLang === 'bg' ? 'Бетон (15€)' : 'Concrete (15€)'}</option>
+                            </select>
+                            <input type="number" class="qty-input" id="qty-${item.id}" value="1" min="1" oninput="recalculate()">
+                        `;
+                    } else {
+                        const unitLabel = item.unit === 'lm' ? (currentLang === 'bg' ? 'л.м.' : 'm') : (currentLang === 'bg' ? 'бр.' : 'pcs');
+                        optionsHtml = `
+                            <input type="number" class="qty-input" id="qty-${item.id}" value="1" min="1" oninput="recalculate()">
+                            <span style="font-size:12px; color:var(--text-muted);">${unitLabel}</span>
+                        `;
+                    }
+
+                    const basePriceText = item.price ? `${item.price} €` : `от ${item.prices.gypsum} €`;
+
+                    itemDiv.innerHTML = `
+                        <label class="calc-label">
+                            <input type="checkbox" id="chk-${item.id}" onchange="recalculate()">
+                            <span data-bg="${item.bg}" data-en="${item.en}">${currentLang === 'bg' ? item.bg : item.en}</span>
+                        </label>
+                        <div class="calc-options">
+                            ${optionsHtml}
+                            <div class="item-price" id="prc-${item.id}">${basePriceText}</div>
+                        </div>
+                    `;
+                    catDiv.appendChild(itemDiv);
+                });
+
+                container.appendChild(catDiv);
+            });
+            recalculate();
+        }
+
+        function recalculate() {
+            let grandTotal = 0;
+            const currencySymbol = currentLang === 'bg' ? '€' : 'euro';
+
+            servicesData.forEach(cat => {
+                cat.items.forEach(item => {
+                    const chk = document.getElementById(`chk-${item.id}`);
+                    const qtyInput = document.getElementById(`qty-${item.id}`);
+                    const priceDisplay = document.getElementById(`prc-${item.id}`);
+
+                    if (chk && chk.checked) {
+                        let unitPrice = item.price || 0;
+                        const qty = parseInt(qtyInput ? qtyInput.value : 1) || 1;
+
+                        if (item.unit === 'material') {
+                            const matSelect = document.getElementById(`mat-${item.id}`);
+                            const mat = matSelect ? matSelect.value : 'gypsum';
+                            unitPrice = item.prices[mat];
+                        }
+
+                        const itemTotal = unitPrice * qty;
+                        grandTotal += itemTotal;
+                        if (priceDisplay) priceDisplay.innerText = `${itemTotal} ${currencySymbol}`;
+                    } else if (priceDisplay) {
+                        const defaultPrice = item.price ? `${item.price} ${currencySymbol}` : `${item.prices.gypsum} ${currencySymbol}`;
+                        priceDisplay.innerText = defaultPrice;
+                    }
+                });
+            });
+
+            document.getElementById('grand-total').innerText = `${grandTotal} ${currencySymbol}`;
+        }
+
+        function switchTab(tabId, btn) {
+            playZapSound();
+            triggerLightning();
+
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+            btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
         }
 
         function triggerLightning() {
@@ -399,102 +566,57 @@
 
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             ctx.strokeStyle = '#38bdf8';
-            ctx.lineWidth = 3;
-            ctx.shadowBlur = 20;
+            ctx.lineWidth = 4;
+            ctx.shadowBlur = 30;
             ctx.shadowColor = '#38bdf8';
 
             ctx.beginPath();
-            let x = Math.random() * canvas.width;
+            ctx.moveTo(canvas.width / 2, 0);
+            let x = canvas.width / 2;
             let y = 0;
-            ctx.moveTo(x, y);
 
             while (y < canvas.height) {
-                x += (Math.random() - 0.5) * 80;
-                y += Math.random() * 40;
+                x += (Math.random() - 0.5) * 100;
+                y += Math.random() * 50;
                 ctx.lineTo(x, y);
             }
             ctx.stroke();
 
-            setTimeout(() => { canvas.style.display = 'none'; }, 120);
+            setTimeout(() => { canvas.style.display = 'none'; }, 150);
         }
 
-        function switchTab(tabId, btn) {
-            playZapSound();
-            triggerLightning();
-
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(b => {
-                b.className = "nav-btn px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-transparent text-slate-400 hover:text-white";
-            });
-
-            document.getElementById(tabId).classList.add('active');
-            btn.className = "nav-btn active px-4 py-2 rounded-xl text-xs font-extrabold transition-all border border-brand-amber bg-brand-amber/10 text-brand-amber neon-border-amber";
+        function playZapSound() {
+            if (!soundOn) return;
+            const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+            osc.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.1);
+            gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+            osc.start();
+            osc.stop(audioCtx.currentTime + 0.1);
         }
 
         function toggleSound() {
             soundOn = !soundOn;
-            const icon = document.getElementById('sound-icon');
-            icon.className = soundOn ? "fa-solid fa-volume-high text-xs" : "fa-solid fa-volume-xmark text-xs text-slate-500";
+            document.getElementById('sound-btn').innerText = soundOn ? '🔊 Sound ON' : '🔇 Sound OFF';
         }
 
         function toggleLanguage() {
-            playZapSound();
             currentLang = currentLang === 'bg' ? 'en' : 'bg';
-            
             document.querySelectorAll('[data-bg]').forEach(el => {
                 el.innerText = el.getAttribute(`data-${currentLang}`);
             });
-
-            calculatePrice();
+            renderCalculator();
         }
 
-        let demoBulbState = false;
-        function toggleDemoBulb() {
-            playZapSound();
-            demoBulbState = !demoBulbState;
-            const bulb = document.getElementById('demo-bulb');
-            const icon = document.getElementById('demo-bulb-icon');
-            const text = document.getElementById('demo-bulb-text');
-            const volt = document.getElementById('voltage-display');
-
-            if (demoBulbState) {
-                bulb.classList.add('bulb-glow-on');
-                icon.className = "fa-solid fa-lightbulb text-4xl text-brand-amber mb-2 animate-pulse";
-                text.className = "text-xs font-extrabold italic text-amber-200";
-                volt.innerText = "230V (ON)";
-                volt.className = "text-brand-amber font-tech font-bold";
-            } else {
-                bulb.classList.remove('bulb-glow-on');
-                icon.className = "fa-solid fa-lightbulb text-4xl text-slate-600 mb-2";
-                text.className = "text-xs font-extrabold italic text-slate-500";
-                volt.innerText = "0V (OFF)";
-                volt.className = "text-brand-electric font-tech";
-            }
-        }
-
-        function calculatePrice() {
-            const area = parseFloat(document.getElementById('calc-area').value) || 0;
-            const rate = parseFloat(document.getElementById('calc-type').value);
-            const total = Math.round(area * rate);
-            
-            document.getElementById('price-result').innerText = total;
-            document.getElementById('currency-label').innerText = currentLang === 'bg' ? 'лв.' : 'BGN';
-        }
-
-        function handleContact(e) {
-            e.preventDefault();
-            playZapSound();
-            document.getElementById('contact-success').classList.remove('hidden');
-            e.target.reset();
-            setTimeout(() => {
-                document.getElementById('contact-success').classList.add('hidden');
-            }, 4000);
-        }
-
-        window.onload = calculatePrice;
+        window.onload = function() {
+            renderCalculator();
+        };
     </script>
 </body>
 </html>
-```
-
-Ето сайта с интегрираното превю в интерактивния прозорец. Файлът съдържа пълната BG/EN функционалност, калкулатора за цени, аудио ефектите и светкавичния преход при превключване на менютата.
