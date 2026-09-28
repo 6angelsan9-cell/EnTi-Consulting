@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ен Ти Консултинг ЕООД | Калкулатор</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <canvas id="lightning-canvas"></canvas>
+
+    <header>
+        <div class="logo">⚡ Ен Ти Консултинг ЕООД</div>
+        <div class="top-controls">
+            <button class="btn-ctrl" id="lang-btn" onclick="toggleLanguage()">🇧🇬 BG / EN 🇬🇧</button>
+            <button class="btn-ctrl" id="sound-btn" onclick="toggleSound()">🔊 Sound ON</button>
+        </div>
+    </header>
+
+    <nav>
+        <a class="nav-btn" href="#" onclick="navigateWithEffect('index.html'); return false;" data-bg="За Нас" data-en="About Us">За Нас</a>
+        <a class="nav-btn" href="#" onclick="navigateWithEffect('services.html'); return false;" data-bg="Услуги" data-en="Services">Услуги</a>
+        <a class="nav-btn active" href="#" onclick="navigateWithEffect('calculator.html'); return false;" data-bg="Калкулатор" data-en="Calculator">Калкулатор</a>
+        <a class="nav-btn" href="#" onclick="navigateWithEffect('locations.html'); return false;" data-bg="Градове" data-en="Locations">Градове</a>
+        <a class="nav-btn" href="#" onclick="navigateWithEffect('contact.html'); return false;" data-bg="Контакти" data-en="Contacts">Контакти</a>
+    </nav>
+
+    <main>
+        <div class="content-box">
+            <h2 data-bg="Интерактивен Калкулатор за Цени" data-en="Interactive Price Calculator">Интерактивен Калкулатор за Цени</h2>
+            <p data-bg="Изберете необходимите услуги и въведете количествата (бр. или линейни метри):"
+               data-en="Select the required services and specify quantities (pcs or linear meters):">
+               Изберете необходимите услуги и въведете количествата (бр. или линейни метри):
+            </p>
+
+            <div id="calc-container"></div>
+
+            <div class="total-sticky">
+                <div class="total-title" data-bg="Обща сума:" data-en="Total Amount:">Обща сума:</div>
+                <div class="total-amount" id="grand-total">0 €</div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        © Ен Ти Консултинг ЕООД — Всички права запазени.
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
